@@ -1,0 +1,35 @@
+.mukta_mahee {
+  font-family: "Mukta Mahee", Arial, sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+}
+
+.mukta_mahee_regular {
+  font-family: "Mukta Mahee", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+}
+.mukta_mahee_bold {
+  font-family: "Mukta Mahee", Arial, sans-serif;
+  font-weight: 600;
+}
+
+.playfair {
+  font-family: "Playfair Display", Times, serif;
+  color: #fff;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.playfair_heading {
+  font-family: "Playfair Display", Times, serif;
+  font-weight: bold;
+}
+.playfair_italic {
+  font-size: 80px;
+  font-family: "Playfair Display", Times, serif;
+  color: #fff;
+  line-height: 1;
+  font-weight: bold;
+  font-style: italic;
+}
