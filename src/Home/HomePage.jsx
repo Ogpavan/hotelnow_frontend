@@ -11,7 +11,7 @@ import udaipur from "../assets/images/udaipur.jpg";
 import bengaluru from "../assets/images/bengaluru.jpg";
 
 import Testamonial from "./Testamonial.jsx";
-import Qna from "./qna.jsx";
+import Qna from "./Qna.jsx";
 import TopHotels from "./TopHotels.jsx";
 
 const cities = [
