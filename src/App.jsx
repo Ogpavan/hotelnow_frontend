@@ -5,6 +5,7 @@ import AboutPage from "./About/AboutPage.jsx";
 import Navbar from "./Navbar/Navbar.jsx";
 import Footer from "./Footer/Footer.jsx";
 import Callbutton from "./Callbutton/Callbutton.jsx";
+import Contact from "./Contact/Contact.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <div className="md:hidden  block ">
         <Callbutton />

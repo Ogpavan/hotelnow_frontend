@@ -1,248 +1,283 @@
-import React from "react";
-import hero_2 from "../assets/images/hero_2.jpg";
+import React, { useEffect, useState } from "react";
+import CountUp from "react-countup";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "../App.css";
-import jaipur from "../assets/images/jaipur.jpg";
-import srinagar from "../assets/images/srinagar.jpg";
-import mumbai from "../assets/images/mumbai.jpg";
-import varanasi from "../assets/images/varanashi.jpg";
-import kochi from "../assets/images/kochi.jpg";
-import agra from "../assets/images/agra.jpg";
-import udaipur from "../assets/images/udaipur.jpg";
-import bengaluru from "../assets/images/bengaluru.jpg";
+import { IoSearchOutline } from "react-icons/io5";
+import { FaStar } from "react-icons/fa";
+import about_t1 from "../assets/images/about_t1.jpg";
+import about_t2 from "../assets/images/about_t2.jpg";
+import Topplaces from "./Topplaces";
+import BusinessModel from "./BusinessModel";
+import TopHotels from "./TopHotels";
+import Testimonial from "./Testimonial";
 
-import Testamonial from "./Testamonial.jsx";
-import Qna from "./Qna.jsx";
-import TopHotels from "./TopHotels.jsx";
+export default function HomePage() {
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
+  const [city, setCity] = useState("");
+  const [startCount, setStartCount] = useState(false);
 
-const cities = [
-  {
-    name: "Jaipur",
-    details:
-      "The city that never sleeps, full of skyscrapers and vibrant nightlife.",
-    image: jaipur,
-  },
-  {
-    name: "Srinagar",
-    details:
-      "The entertainment capital of the world, known for Hollywood and beaches.",
-    image: srinagar,
-  },
-  {
-    name: "Mumbai",
-    details:
-      "Famous for deep-dish pizza, jazz music, and stunning architecture.",
-    image: mumbai,
-  },
-  {
-    name: "Varanasi",
-    details:
-      "The city of love, home to the Eiffel Tower and world-class cuisine.",
-    image: varanasi,
-  },
-  {
-    name: "Kochi",
-    details: "A bustling metropolis blending tradition and technology.",
-    image: kochi,
-  },
-  {
-    name: "Agra",
-    details: "A bustling metropolis blending tradition and technology.",
-    image: agra,
-  },
-  {
-    name: "Udaipur",
-    details: "A bustling metropolis blending tradition and technology.",
-    image: udaipur,
-  },
-  {
-    name: " Bengaluru",
-    details: "A bustling metropolis blending tradition and technology.",
-    image: bengaluru,
-  },
-];
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = document.getElementById("stats-section");
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+          setStartCount(true);
+        }
+      }
+    };
 
-function HomePage() {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="relative  ">
-      {/* Fixed Background Image */}
-      <div
-        className="fixed top-0 left-0   w-full h-screen bg-cover bg-center z-[-1]"
-        style={{ backgroundImage: `url(${hero_2})` }}
-      ></div>
-
-      {/* Content */}
-      <div className="relative   z-10 w-full h-screen flex justify-center items-center bg-black/50 backdrop-blur-sm   ">
-        <div className="flex justify-evenly items-center w-full md:flex-row flex-col">
-          <div className=" flex flex-col text-center   ">
-            <h1 className=" md:hidden md:text-5xl font-bold text-white playfair text-xl mt-10 md:mt-4">
-              Where do you want to Stay!
-            </h1>
-            <h1 className="hidden md:block md:text-5xl font-bold text-white playfair">
-              Where do
-              <br /> you want
-              <br /> to Stay!
-            </h1>
-            <span className="text-white mukta_mahee mt-2">
-              Get the best deals for your next trip
-            </span>
-            <div className="md:flex gap-4 md:mt-4 hidden lg:block ">
-              <button className="px-10 py-2 rounded-full bg-[#1ED760] mukta_mahee_bold text-white uppercase transform hover:scale-105 hover:bg-[#21e065] transition-colors duration-200">
-                Call us : 91 67890-09876
-              </button>
-            </div>
-          </div>
-          <div className="  p-4 rounded-xl   md:mt-10 w-full max-w-sm  ">
-            <div className="bg-[#ecf0f3] p-6 md:p-8 rounded-xl  shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
-              <form action="#" method="POST">
-                {/* Name Input */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm text-gray-700 font-semibold"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="Enter your name"
-                    name="name"
-                    className="mt-2 block w-full px-4 py-2 rounded-full bg-[#ecf0f3] shadow-[inset_4px_4px_8px_#d1d9e6,_-4px_-4px_8px_#ffffff] focus:outline-none"
-                    required
-                  />
-                </div>
-
-                {/* City Selection */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="city"
-                    className="block text-sm text-gray-700 font-semibold"
-                  >
-                    City
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      id="citySearch"
-                      placeholder="Search city..."
-                      className="mt-2 block w-full px-4 py-2 rounded-full bg-[#ecf0f3] shadow-[inset_4px_4px_8px_#d1d9e6,_-4px_-4px_8px_#ffffff] focus:outline-none"
-                    />
-                    <select
-                      id="city"
-                      name="city"
-                      className="absolute inset-0 w-full px-4 py-2 rounded-full bg-transparent opacity-0 focus:outline-none"
-                    >
-                      <option value="">Select a city</option>
-                      <option value="New York">New York</option>
-                      <option value="Los Angeles">Los Angeles</option>
-                      <option value="Chicago">Chicago</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Phone Number */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm text-gray-700 font-semibold"
-                  >
-                    Phone Number
-                  </label>
-                  <div className="flex space-x-2">
-                    <input
-                      type="text"
-                      id="countryCode"
-                      name="countryCode"
-                      placeholder="+1"
-                      className="w-16 px-4 py-2 rounded-full bg-[#ecf0f3] shadow-[inset_4px_4px_8px_#d1d9e6,_-4px_-4px_8px_#ffffff] focus:outline-none"
-                      required
-                    />
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      placeholder="123-456-7890"
-                      className="w-full px-4 py-2 rounded-full bg-[#ecf0f3] shadow-[inset_4px_4px_8px_#d1d9e6,_-4px_-4px_8px_#ffffff] focus:outline-none"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Date Picker */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="date"
-                    className="block text-sm text-gray-700 font-semibold"
-                  >
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    className="mt-2 block w-full px-4 py-2 rounded-full bg-[#ecf0f3] shadow-[inset_4px_4px_8px_#d1d9e6,_-4px_-4px_8px_#ffffff] focus:outline-none"
-                    required
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <div className="mt-6">
-                  <button
-                    type="submit"
-                    className="w-full py-3 rounded-full bg-blue-500 shadow-[8px_8px_16px_#d1d9e6,_-8px_-8px_16px_#ffffff]  text-white font-semibold transition-transform transform hover:scale-105 hover:shadow-lg"
-                  >
-                    Book Now
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+    <>
+      <section className="relative w-full md:h-[900px] h-[1200px] overflow-hidden   ">
+        {/* Image with Zoom Animation */}
+        <div className="absolute inset-0 w-full h-full  ">
+          <img
+            src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/img-banner-2-scaled-1-1920x1315.jpg"
+            alt="Banner"
+            className="w-full h-full object-cover animate-zoomInOut"
+          />
         </div>
-      </div>
 
-      {/* Scrollable Content - City Cards */}
-      <section className="bg-white py-16 px-8 ">
-        <div className="container mx-auto text-center mb-8 ">
-          <h2 className="text-4xl font-bold  playfair_heading text-gray-800">
-            Explore Cities
-          </h2>
-          <p className="mukta_mahee">
-            Find the best hotel in your desired cities
-          </p>
-        </div>
-        <div className="flex flex-wrap justify-center items-center gap-6">
-          {cities.map((city, index) => (
-            <div
-              key={index}
-              className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-overlay"></div>
+
+        {/* Centered Text */}
+        <div className="absolute inset-0 md:flex flex-col items-center justify-center">
+          <div className="  items-center gap-y-5 mb-10 -space-y-3 flex flex-col mt-40 md:mt-0">
+            <ul className="flex space-x-1 text-yellow-500">
+              <li>
+                <FaStar />
+              </li>
+              <li>
+                <FaStar />
+              </li>
+              <li>
+                <FaStar />
+              </li>
+              <li></li>
+              <li>
+                <FaStar />
+              </li>
+              <li>
+                <FaStar />
+              </li>
+            </ul>
+
+            <h1 className="text-5xl text-center md:text-6xl font-bold text-white mb-4 md:jost-bold">
+              Welcome to HotelNow.
+            </h1>
+            <p className="text-sm md:text-lg text-white jost-regular">
+              Find the perfect hotel for your stay.
+            </p>
+          </div>
+
+          {/* Search Form */}
+          <div className="bg-white/10 p-2 md:rounded-full rounded-lg mt-5 w-full md:w-auto">
+            <form
+              method="GET"
+              className="bg-white px-7 py-4 shadow-lg rounded-lg md:rounded-full flex flex-col md:flex-row flex-wrap items-center justify-between gap-4 md:gap-6 w-full"
             >
-              <div className="relative">
-                <img
-                  src={city.image}
-                  alt={city.name}
-                  className="w-full h-60 max-w-xs object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-
-                <p className="absolute bottom-0 left-0 px-2 py-1  text-white font-bold mukta_mahee_bold ">
-                  {city.name}
-                </p>
+              {/* City Selection */}
+              <div className="flex flex-col w-full md:w-auto">
+                <label className="text-gray-700 ml-1">City</label>
+                <select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full md:w-40 px-3 py-2 border border-gray-200 rounded-xl text-gray-500 bg-[#ECFAFB] outline-none"
+                >
+                  <option value="">Select City</option>
+                  <option value="new-york">New York</option>
+                  <option value="los-angeles">Los Angeles</option>
+                  <option value="london">London</option>
+                  <option value="paris">Paris</option>
+                  <option value="dubai">Dubai</option>
+                </select>
               </div>
 
-              <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white p-4">
-                <h3 className="text-2xl font-bold">{city.name}</h3>
-                <p className="text-sm mt-2 text-center">{city.details}</p>
+              {/* Check-in Date */}
+              <div className="flex flex-col w-full md:w-auto">
+                <label className="text-gray-700">Check-in</label>
+                <DatePicker
+                  selected={checkInDate}
+                  onChange={(date) => setCheckInDate(date)}
+                  placeholderText="Select date"
+                  className="w-full md:w-36 px-3 py-2 border border-gray-200 rounded-xl text-gray-500 bg-[#ECFAFB] outline-none"
+                  dateFormat="dd/MM/yyyy"
+                />
+              </div>
+
+              {/* Check-out Date */}
+              <div className="flex flex-col w-full md:w-auto">
+                <label className="text-gray-700">Check-out</label>
+                <DatePicker
+                  selected={checkOutDate}
+                  onChange={(date) => setCheckOutDate(date)}
+                  placeholderText="Select date"
+                  className="w-full md:w-36 px-3 py-2 border border-gray-200 rounded-xl text-gray-500 bg-[#ECFAFB] outline-none"
+                  dateFormat="dd/MM/yyyy"
+                />
+              </div>
+
+              {/* Adults & Children Selection */}
+              <div className="flex w-full md:w-auto gap-4">
+                {/* Adults */}
+                <div className="flex flex-col w-1/2 md:w-auto">
+                  <label className="text-gray-700">Adults</label>
+                  <select
+                    value={adults}
+                    onChange={(e) => setAdults(e.target.value)}
+                    className="w-full md:w-16 px-3 py-2 border border-gray-200 rounded-xl text-gray-500 bg-[#ECFAFB] outline-none"
+                  >
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <option key={i + 1} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Children */}
+                <div className="flex flex-col w-1/2 md:w-auto">
+                  <label className="text-gray-700">Children</label>
+                  <select
+                    value={children}
+                    onChange={(e) => setChildren(e.target.value)}
+                    className="w-full md:w-16 px-3 py-2 border border-gray-200 rounded-xl text-gray-500 bg-[#ECFAFB] outline-none"
+                  >
+                    {Array.from({ length: 6 }, (_, i) => (
+                      <option key={i} value={i}>
+                        {i}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Search Button */}
+              <div className="w-full md:w-auto flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-[#3b61dd] flex items-center hover:bg-blue-600 text-white md:py-5 py-3 px-5 rounded-full transition duration-300"
+                >
+                  <IoSearchOutline size={24} />{" "}
+                  <span className="ml-2 md:hidden jost-regular">Search</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section className="absolute w-full flex justify-center ">
+        <div
+          id="stats-section"
+          className="mt-[-80px] bg-white p-5 rounded-xl jost-regular text-gray-700 min-w-[75%] "
+        >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "Hotels", end: 150 },
+              { title: "Total Guests", end: 5000 },
+              { title: "Cities", end: 30 },
+              { title: "Bookings", end: 1200 },
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center bg-[#ECFAFB] p-5 rounded-xl"
+              >
+                <h2
+                  className="text-3xl font-bold text-gray-800"
+                  style={{
+                    width: "6rem",
+                    textAlign: "center",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  <CountUp
+                    start={startCount ? 0 : null}
+                    end={stat.end}
+                    duration={3}
+                  />
+                  +
+                </h2>
+                <h5 className="text-lg">{stat.title}</h5>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#ECFAFB] flex justify-center items-center px-4">
+        <div className="max-w-[1100px] w-full">
+          <div className="bg-white p-5 md:mt-36 mt-52 mb-20 rounded-xl">
+            {/* First Row */}
+            <div className="flex flex-col  md:flex-row items-center">
+              <img
+                src={about_t1}
+                alt="Luxury Stay"
+                className="w-full md:w-1/2 md:rounded-tl-xl object-cover"
+              />
+              <div className="md:p-7 mb-7 md:mb-0 p-3 space-y-3  md:text-left">
+                <h1 className="text-2xl jost-bold text-gray-800">
+                  Experience Luxury & Comfort
+                </h1>
+                <p className="text-gray-700 jost-regular">
+                  Enjoy world-class stays at top-rated hotels. Whether for
+                  business or leisure, we provide the finest accommodations with
+                  top-tier services.
+                </p>
+                <button className="bg-[#3b61dd] hover:bg-blue-600 text-white py-2 px-4 rounded-full transition duration-300 jost-light">
+                  Explore Hotels
+                </button>
               </div>
             </div>
-          ))}
+
+            {/* Second Row */}
+            <div className="flex flex-col-reverse md:flex-row items-center">
+              <div className="md:p-7 p-3 space-y-3  md:text-left">
+                <h1 className="text-2xl jost-bold text-gray-800">
+                  Hassle-Free Hotel Booking
+                </h1>
+                <p className="text-gray-700 jost-regular">
+                  Book your stay with ease and confidence. Choose from a wide
+                  range of hotels, compare prices, and secure the best deals—all
+                  in one place.
+                </p>
+                <button className="bg-[#3b61dd] hover:bg-blue-600 text-white py-2 px-4 rounded-full transition duration-300 jost-light">
+                  Book Your Stay
+                </button>
+              </div>
+              <img
+                src={about_t2}
+                alt="Easy Booking"
+                className="w-full md:w-1/2 rounded-br-xl object-cover"
+              />
+            </div>
+          </div>
         </div>
+      </section>
+
+      <section>
+        <Topplaces />
       </section>
       <section>
         <TopHotels />
-        <Testamonial />
-        <Qna />
       </section>
-    </div>
+      <section>
+        <BusinessModel />
+      </section>
+      <section>
+        <Testimonial />
+      </section>
+    </>
   );
 }
-
-export default HomePage;
