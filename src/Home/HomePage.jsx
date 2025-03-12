@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
-
+import hero from "../assets/images/hero.jpg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../App.css";
@@ -42,7 +42,7 @@ export default function HomePage() {
         {/* Image with Zoom Animation */}
         <div className="absolute inset-0 w-full h-full  ">
           <img
-            src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/img-banner-2-scaled-1-1920x1315.jpg"
+            src={hero}
             alt="Banner"
             className="w-full h-full object-cover animate-zoomInOut"
           />
