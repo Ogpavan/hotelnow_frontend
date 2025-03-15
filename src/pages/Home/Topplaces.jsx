@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import agra from "../../assets/images/agra.jpg";
 import jaipur from "../../assets/images/jaipur.jpg";
 import mumbai from "../../assets/images/mumbai.jpg";
@@ -36,12 +38,22 @@ const cities = [
 ];
 
 function Topplaces() {
+  const navigate = useNavigate();
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const handleCityClick = (city) => {
+    setSelectedCity(city);
+    setTimeout(() => {
+      navigate(`/hotels/${city.name}`, { state: city });
+    }, 600); // Wait for animation to finish before navigating
+  };
+
   return (
     <div className="flex justify-center py-8 px-4 md:px-8">
       <div className="w-full max-w-5xl">
         <h1 className="text-2xl sm:text-3xl jost-bold text-gray-800 text-center mb-6">
           Top Places to Visit
-          <p className="text-gray-600 jost-regular text-sm mt-1">
+          <p className="text-gray-600 text-sm mt-1 jost-light">
             Find the best places to visit
           </p>
         </h1>
@@ -62,7 +74,17 @@ function Topplaces() {
         >
           {cities.map((city, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-80 sm:h-96 overflow-hidden rounded-xl shadow-lg">
+              <motion.div
+                className="relative w-full h-80 sm:h-96 overflow-hidden rounded-xl shadow-lg cursor-pointer"
+                onClick={() => handleCityClick(city)}
+                initial={{ scale: 1, opacity: 1 }}
+                animate={
+                  selectedCity?.name === city.name
+                    ? { scale: 1.3, rotateY: 15, opacity: 0, perspective: 1000 }
+                    : {}
+                }
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
                 <img
                   src={city.image}
                   alt={city.name}
@@ -75,7 +97,7 @@ function Topplaces() {
                     Hotels Available: {city.hotels}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

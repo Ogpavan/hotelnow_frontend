@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import Callbutton from "./components/Callbutton/Callbutton.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import SearchResults from "./pages/SearchResults/SearchResults.jsx";
+import HotelList from "./pages/HotelList.jsx/HotelList.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
 
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/hotels/:cityName" element={<HotelList />} />
       </Routes>
       <div className="md:hidden  block ">
         <Callbutton />

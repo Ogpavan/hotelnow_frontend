@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import hero from "../../assets/images/hero.jpg";
 import Testimonials from "../Home/Testimonial";
 
@@ -6,60 +7,110 @@ export default function AboutUs() {
   return (
     <div className="bg-[#ECFAFB] min-h-screen">
       {/* Hero Section */}
-      <div className="relative w-full h-[450px] overflow-hidden">
-        <img
+      <motion.div
+        className="relative w-full h-[450px] overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.img
           src={hero}
           alt="About Hotel Now"
           className="w-full h-full object-cover"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         />
         <div className="absolute inset-0 bg-gradient-overlay flex flex-col items-center justify-center text-white text-center px-4">
-          <h1 className="text-3xl md:text-4xl jost-bold">About Us</h1>
-          <p className="text-xl md:text-2xl max-w-md mt-3   jost-light">
+          <motion.h1
+            className="text-3xl md:text-4xl jost-bold"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            About Us
+          </motion.h1>
+          <motion.p
+            className="text-xl md:text-2xl max-w-md mt-3 jost-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
             "Your trusted companion in finding the perfect stay, anywhere in the
             world"
-          </p>
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Our Mission Section */}
-      <div className="container mx-auto px-6 py-16 max-w-4xl text-center">
-        <h2 className="text-4xl jost-bold text-gray-800">Our Mission</h2>
-        <p className="mt-4 text-gray-600 leading-relaxed text-lg jost-regular">
-          At <span className="font-semibold">Hotel Now</span>, our mission is to
-          make travel easy, affordable, and memorable for everyone. We strive to
-          connect travelers with the best accommodations tailored to their
-          needs, ensuring a seamless booking experience that prioritizes
-          comfort, quality, and affordability.
-        </p>
-      </div>
-
-      {/* Our Story Section */}
-      <div className="container mx-auto px-6 py-16 max-w-4xl">
-        <h2 className="text-4xl jost-bold text-gray-800 text-center">
-          Our Story
-        </h2>
-        <p className="mt-4 text-gray-600 leading-relaxed text-lg jost-regular">
-          It all started with three friends who loved to travel but struggled to
-          find the perfect place to stay. Frustrated with high prices and
-          unreliable options, they set out to create a platform that would
-          change the way people experience travel. In 2015,{" "}
-          <span className="font-semibold">Hotel Now</span> was born—a seamless
-          way to book accommodations that suit every budget and style.
-        </p>
-      </div>
+      {/* Animated Section Wrapper */}
+      {[
+        {
+          title: "Our Mission",
+          content:
+            "At Hotel Now, our mission is to make travel easy, affordable, and memorable for everyone. We strive to connect travelers with the best accommodations tailored to their needs, ensuring a seamless booking experience that prioritizes comfort, quality, and affordability.",
+        },
+        {
+          title: "Our Story",
+          content:
+            "It all started with three friends who loved to travel but struggled to find the perfect place to stay. Frustrated with high prices and unreliable options, they set out to create a platform that would change the way people experience travel. In 2015, Hotel Now was born—a seamless way to book accommodations that suit every budget and style.",
+        },
+      ].map((section, index) => (
+        <motion.div
+          key={index}
+          className="container mx-auto px-6 py-16 max-w-4xl text-center"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl jost-bold text-gray-800">{section.title}</h2>
+          <p className="mt-4 text-gray-600 leading-relaxed text-lg jost-regular">
+            {section.content}
+          </p>
+        </motion.div>
+      ))}
 
       {/* Founders Section */}
-      <div className="container mx-auto px-6 py-12 bg-white rounded-lg shadow-lg">
+      <motion.div
+        className="container mx-auto px-6 py-12 bg-white rounded-lg shadow-lg"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-8 jost-bold">
           Meet Our Founders
         </h2>
-        <div className="flex flex-col md:flex-row justify-center gap-10 mt-8">
+        <motion.div
+          className="flex flex-col md:flex-row justify-center gap-10 mt-8"
+          initial="hidden"
+          whileInView="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.3 },
+            },
+          }}
+          viewport={{ once: true }}
+        >
           {[
             { name: "Alice Johnson", role: "CEO & Visionary" },
             { name: "Michael Smith", role: "CTO & Architect" },
             { name: "Sophia Brown", role: "COO & Strategist" },
           ].map((founder, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+            <motion.div
+              key={index}
+              className="flex flex-col items-center text-center"
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { type: "spring", stiffness: 100 },
+                },
+              }}
+            >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR-AJaVc2YjAgRublwzcqb3sRserionqprHbNRfWm_Ee1jM-VhdFsvuNbufcn3qzsNOsA&usqp=CAU"
                 alt={founder.name}
@@ -69,13 +120,19 @@ export default function AboutUs() {
                 {founder.name}
               </h3>
               <p className="text-gray-500">{founder.role}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Contact Section */}
-      <div className="bg-[#3b61dd] text-white py-12">
+      <motion.div
+        className="bg-[#3b61dd] text-white py-12"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
         <div className="container mx-auto text-center">
           <h2 className="text-4xl jost-bold mb-6">Get in Touch</h2>
           <p className="text-xl opacity-80 jost-regular">
@@ -96,7 +153,8 @@ export default function AboutUs() {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
+
       <Testimonials />
     </div>
   );

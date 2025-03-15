@@ -14,9 +14,9 @@ export default function Navbar() {
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 text-white ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         {/* Logo */}
-        <NavLink to="/" className="text-2xl font-bold text-white">
+        <NavLink to="/" className="text-2xl jost-bold text-white">
           HotelNow.
         </NavLink>
 
@@ -30,7 +30,7 @@ export default function Navbar() {
       <div
         className={`fixed inset-0 bg-white transition-transform duration-300 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } flex flex-col items-center justify-center space-y-6 shadow-lg md:w-1/2 md:left-0 md:top-0 md:h-full md:fixed`}
+        } flex flex-col items-center justify-center space-y-6 shadow-lg  md:left-0 md:top-0 md:h-full md:fixed`}
       >
         {navItems.map((item, index) => (
           <NavLink
